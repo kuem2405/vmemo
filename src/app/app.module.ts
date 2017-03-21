@@ -29,6 +29,19 @@ export type StoreType = {
   restoreInputValues: () => void,
   disposeOldHosts: () => void
 };
+import {AuthService} from "./shared/services/auth.service";
+
+export interface AppConfig {
+  BASE_URL:string,
+  APP_ID:string,
+  APP_SECRET:string
+}
+
+export const APPCONFIG:AppConfig = {
+  BASE_URL: 'http://api.vmemo.vn',
+  APP_ID: '5d11ca221cea96df5744d14bb4167a43',
+  APP_SECRET: 'ee40996e0fe4ccfe69ecc0dbca76bab9',
+};
 
 /**
  * `AppModule` is the main entry point into Angular2's bootstraping process
@@ -50,7 +63,9 @@ export type StoreType = {
   ],
   providers: [ // expose our Services and Providers into Angular's dependency injection
     ENV_PROVIDERS,
-    APP_PROVIDERS
+    APP_PROVIDERS,
+    AuthService,
+    {provide:'APP_CONFIG_TOKEN', useValue:APPCONFIG}
   ]
 })
 
